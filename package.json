@@ -1,0 +1,64 @@
+{
+  "name": "detect-next-version",
+  "version": "0.0.0-semantic-release",
+  "description": "Calculates next version, based on given commit message and following Conventional Commits",
+  "repository": "tunnckoCore/detect-next-version",
+  "author": "Charlike Mike Reagent (https://i.am.charlike.online)",
+  "nspId": "todo",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "yarn hela test",
+    "precommit": "yarn hela precommit",
+    "commit": "yarn hela commit",
+    "prepublishOnly": "yarn hela protect"
+  },
+  "license": "Apache-2.0",
+  "licenseStart": 2017,
+  "engines": {
+    "node": ">=8",
+    "npm": ">=5",
+    "yarn": ">=1"
+  },
+  "files": [
+    "src/"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "hela": "*",
+    "hela-config-tunnckocore": "*",
+    "mukla": "0.4.9",
+    "nodemon": "1.12.1"
+  },
+  "keywords": [
+    "automation"
+  ],
+  "verb": {
+    "run": true,
+    "toc": {
+      "render": true,
+      "method": "preWrite",
+      "maxdepth": 3
+    },
+    "layout": "empty",
+    "tasks": [
+      "readme"
+    ],
+    "related": {
+      "list": [
+        "dush",
+        "p-map-series",
+        "execa",
+        "hela",
+        "mri"
+      ],
+      "highlight": "hela"
+    },
+    "lint": {
+      "reflinks": true
+    },
+    "reflinks": []
+  },
+  "release": {
+    "analyzeCommits": "simple-commit-message"
+  }
+}
