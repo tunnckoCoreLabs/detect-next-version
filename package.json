@@ -4,7 +4,7 @@
   "description": "Calculates next version, based on given commit message and following Conventional Commits",
   "repository": "tunnckoCore/detect-next-version",
   "author": "Charlike Mike Reagent (https://i.am.charlike.online)",
-  "nspId": "todo",
+  "nspId": "d0aea59c-0e09-42ac-bd67-2c48f22c5226",
   "main": "./src/index.js",
   "scripts": {
     "test": "yarn hela test",
@@ -26,8 +26,8 @@
     "parse-commit-message": "0.1.1"
   },
   "devDependencies": {
-    "hela": "*",
-    "hela-config-tunnckocore": "*",
+    "hela": "1.3.14",
+    "hela-config-tunnckocore": "2.0.37",
     "isobject": "3.0.1",
     "mukla": "0.4.9",
     "nodemon": "1.12.1"

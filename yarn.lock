@@ -846,6 +846,12 @@ detect-libc@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.2.tgz#71ad5d204bf17a6a6ca8f450c61454066ef461e1"
 
+detect-next-version@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/detect-next-version/-/detect-next-version-1.0.0.tgz#aa87d790a8e11fba360476a7bfcd185bc257f673"
+  dependencies:
+    parse-commit-message "0.1.1"
+
 dezalgo@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/dezalgo/-/dezalgo-1.0.3.tgz#7f742de066fc748bc8db820569dddce49bf0d456"
@@ -1607,11 +1613,12 @@ hawk@~6.0.2:
     hoek "4.x.x"
     sntp "2.x.x"
 
-hela-config-tunnckocore@*:
-  version "2.0.35"
-  resolved "https://registry.yarnpkg.com/hela-config-tunnckocore/-/hela-config-tunnckocore-2.0.35.tgz#277fbe253c0ca261b5bf754a9995e55d3c52714f"
+hela-config-tunnckocore@2.0.37:
+  version "2.0.37"
+  resolved "https://registry.yarnpkg.com/hela-config-tunnckocore/-/hela-config-tunnckocore-2.0.37.tgz#0f87a538a4c3e3257e6b2b10f20c3a56295e3817"
   dependencies:
     all-contributors-cli "4.8.1"
+    detect-next-version "1.0.0"
     eslint "4.11.0"
     eslint-config-tunnckocore "0.2.0"
     gitcommit "0.2.4"
@@ -1626,7 +1633,7 @@ hela-config-tunnckocore@*:
     rimraf "2.6.2"
     semver "5.4.1"
 
-hela@*, hela@1.3.14:
+hela@1.3.14:
   version "1.3.14"
   resolved "https://registry.yarnpkg.com/hela/-/hela-1.3.14.tgz#ea7888369d7d2cc5bf61cc5fef08120f5f6bf8f0"
   dependencies:
