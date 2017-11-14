@@ -3,25 +3,36 @@
  * @license Apache-2.0
  */
 
-module.exports = function detectChange (commit) {
-  const commitParts = commit.split('\n');
-  const header = commitParts[0];
-  const body = commitParts.slice(1).join('\n');
-  const parts = /^(\w+)(?:\((.+)\))?\: (.+)$/.exec(header);
-  const breaking = 'BREAKING CHANGE';
+const parseGitCommit = require('parse-git-commit');
 
-  const isBreaking = header.includes(breaking) || body.includes(breaking);
+module.exports = function detectChange (commitMessage) {
+  const result = parseGitCommit(commitMessage, incrementMapper);
+  return result.increment;
+};
+
+function incrementMapper (commit) {
+  const isBreaking = isBreakingChange(commit);
   let increment = null;
 
-  if (/fix|bugfix|patch/.test(parts[1])) {
+  if (/fix|bugfix|patch/.test(commit.type)) {
     increment = 'patch';
   }
-  if (/feat|feature|minor/.test(parts[1])) {
+  if (/feat|feature|minor/.test(commit.type)) {
     increment = 'minor';
   }
-  if (/break|breaking|major/.test(parts[1]) || isBreaking) {
+  if (/break|breaking|major/.test(commit.type) || isBreaking) {
     increment = 'major';
   }
 
-  return increment;
-};
+  return Object.assign({}, commit, { increment, isBreaking });
+}
+
+/* eslint-disable no-param-reassign */
+
+function isBreakingChange ({ subject, body, footer }) {
+  body = body || '';
+  footer = footer || '';
+
+  const re = 'BREAKING CHANGE:';
+  return subject.includes(re) || body.includes(re) || footer.includes(re);
+}

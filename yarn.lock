@@ -2696,6 +2696,10 @@ package-json@4.0.1, package-json@^4.0.0:
     registry-url "^3.0.3"
     semver "^5.1.0"
 
+parse-git-commit@0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/parse-git-commit/-/parse-git-commit-0.1.3.tgz#a23cee60ce467c65cc4ae5a55f671cd961ac1f69"
+
 parse-git-log@0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/parse-git-log/-/parse-git-log-0.2.1.tgz#1cc8c63c8390a2fdbf01368255f43937f8a23ee1"
