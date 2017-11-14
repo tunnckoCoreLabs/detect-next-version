@@ -3,11 +3,11 @@
  * @license Apache-2.0
  */
 
-const parseGitCommit = require('parse-git-commit');
+const parseCommitMessage = require('parse-commit-message');
 
-module.exports = function detectChange (commitMessage) {
-  const result = parseGitCommit(commitMessage, incrementMapper);
-  return result.increment;
+module.exports = function detectChange (commitMessage, full) {
+  const result = parseCommitMessage(commitMessage, incrementMapper);
+  return full === true ? result : result.increment;
 };
 
 function incrementMapper (commit) {

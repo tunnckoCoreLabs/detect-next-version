@@ -23,11 +23,12 @@
     "src/"
   ],
   "dependencies": {
-    "parse-git-commit": "0.1.3"
+    "parse-commit-message": "0.1.1"
   },
   "devDependencies": {
     "hela": "*",
     "hela-config-tunnckocore": "*",
+    "isobject": "3.0.1",
     "mukla": "0.4.9",
     "nodemon": "1.12.1"
   },
@@ -58,9 +59,8 @@
     "lint": {
       "reflinks": true
     },
-    "reflinks": []
-  },
-  "release": {
-    "analyzeCommits": "simple-commit-message"
+    "reflinks": [
+      "hela"
+    ]
   }
 }
