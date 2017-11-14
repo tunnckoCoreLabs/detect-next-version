@@ -1,6 +1,6 @@
 {
   "name": "detect-next-version",
-  "version": "0.0.0-semantic-release",
+  "version": "0.0.0-semantic-release-app",
   "description": "Calculates next version, based on given commit message and following Conventional Commits",
   "repository": "tunnckoCore/detect-next-version",
   "author": "Charlike Mike Reagent (https://i.am.charlike.online)",
@@ -23,7 +23,7 @@
     "src/"
   ],
   "dependencies": {
-    "parse-commit-message": "0.1.1"
+    "parse-commit-message": "0.2.0"
   },
   "devDependencies": {
     "hela": "1.3.14",

@@ -2707,6 +2707,10 @@ parse-commit-message@0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/parse-commit-message/-/parse-commit-message-0.1.1.tgz#cfbe9e84aa5f4cdbe2bfc559f7829337d06f78c4"
 
+parse-commit-message@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/parse-commit-message/-/parse-commit-message-0.2.0.tgz#1a5fe358999ad7cd1f3f0e0135622342681ccce4"
+
 parse-git-log@0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/parse-git-log/-/parse-git-log-0.2.1.tgz#1cc8c63c8390a2fdbf01368255f43937f8a23ee1"
