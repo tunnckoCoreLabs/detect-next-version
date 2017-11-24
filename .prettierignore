@@ -21,6 +21,9 @@ tmp
 package-lock.json
 npm-shrinkwrap.json
 
+# goddammit, don't
+*.json
+
 # Typescript v1 declaration files
 typings/
 
