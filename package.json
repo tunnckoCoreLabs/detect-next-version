@@ -30,7 +30,6 @@
     "eslint-config-tunnckocore": "0.3.0",
     "hela": "2.0.8",
     "hela-config-tunnckocore": "2.2.41",
-    "isobject": "3.0.1",
     "mukla": "0.4.9"
   },
   "keywords": [
