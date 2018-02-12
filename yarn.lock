@@ -845,7 +845,7 @@ eslint-config-airbnb@^16.0.0:
   dependencies:
     eslint-config-airbnb-base "^12.1.0"
 
-eslint-config-tunnckocore@^0.3.0:
+eslint-config-tunnckocore@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/eslint-config-tunnckocore/-/eslint-config-tunnckocore-0.3.0.tgz#222fec1182bc52dd8d92925921f07f61b068e6ce"
   dependencies:
@@ -945,7 +945,7 @@ eslint-visitor-keys@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
 
-eslint@^4.0.0, eslint@^4.11.0, eslint@^4.5.0:
+eslint@4.17.0, eslint@^4.0.0, eslint@^4.5.0:
   version "4.17.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.17.0.tgz#dc24bb51ede48df629be7031c71d9dc0ee4f3ddf"
   dependencies:
@@ -1424,7 +1424,7 @@ hawk@~6.0.2:
     hoek "4.x.x"
     sntp "2.x.x"
 
-hela-config-tunnckocore@^2.2.8:
+hela-config-tunnckocore@2.2.41:
   version "2.2.41"
   resolved "https://registry.yarnpkg.com/hela-config-tunnckocore/-/hela-config-tunnckocore-2.2.41.tgz#cbb4387cd3935f4d4533a7bf51c0f0a9c884fc56"
   dependencies:
@@ -1439,7 +1439,7 @@ hela-config-tunnckocore@^2.2.8:
     rimraf "2.6.2"
     semver "5.5.0"
 
-hela@^2.0.6:
+hela@2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/hela/-/hela-2.0.6.tgz#5f4b3415c08bc11770822fb89864ac3e0090f747"
   dependencies:
@@ -1762,7 +1762,7 @@ isexe@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
 
-isobject@3.0.1, isobject@^3.0.1:
+isobject@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
 
@@ -2121,7 +2121,7 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
-mukla@^0.4.9:
+mukla@0.4.9:
   version "0.4.9"
   resolved "https://registry.yarnpkg.com/mukla/-/mukla-0.4.9.tgz#195cf3954154597e35599fdbb4a13c2a41d733f4"
   dependencies:
@@ -2346,7 +2346,7 @@ parse-commit-message@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/parse-commit-message/-/parse-commit-message-0.2.0.tgz#1a5fe358999ad7cd1f3f0e0135622342681ccce4"
 
-parse-commit-message@^1.0.0:
+parse-commit-message@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/parse-commit-message/-/parse-commit-message-1.1.1.tgz#2cd95ec3007137110fbe8ea0e79d79a0a33079ad"
   dependencies:
