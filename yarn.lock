@@ -217,7 +217,7 @@ array-unique@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/array-unique/-/array-unique-0.2.1.tgz#a1d97ccafcbc2625cc70fadceb36a50c58b01a53"
 
-arrayify@1.0.0, arrayify@^1.0.0:
+arrayify@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/arrayify/-/arrayify-1.0.0.tgz#f06a98235b8ef14ca1995992411a9fefb4e49cfc"
 
@@ -553,7 +553,7 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-collect-mentions@^0.1.1:
+collect-mentions@0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/collect-mentions/-/collect-mentions-0.1.1.tgz#5fbb3d9e5a0fa4b458a46900b93d1aabd2647fd2"
   dependencies:
@@ -2369,12 +2369,12 @@ parse-commit-message@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/parse-commit-message/-/parse-commit-message-0.2.0.tgz#1a5fe358999ad7cd1f3f0e0135622342681ccce4"
 
-parse-commit-message@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/parse-commit-message/-/parse-commit-message-1.1.1.tgz#2cd95ec3007137110fbe8ea0e79d79a0a33079ad"
+parse-commit-message@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/parse-commit-message/-/parse-commit-message-1.1.2.tgz#95b6015bcb99a6efab5a8e208c95e59cce62f40d"
   dependencies:
-    arrayify "^1.0.0"
-    collect-mentions "^0.1.1"
+    arrayify "1.0.0"
+    collect-mentions "0.1.1"
 
 parse-git-log@0.2.1:
   version "0.2.1"

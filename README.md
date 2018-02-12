@@ -27,12 +27,6 @@ You may also read the [Contributing Guide](./CONTRIBUTING.md). There, beside _"H
 [![Node Version Required][nodeversion-img]][nodeversion-url] 
 [![Renovate App Status][renovate-img]][renovate-url]
 
-<!--
-<a target="_blank" rel="nofollow" href="https://app.codesponsor.io/link/K7yYzzA5nb2ZDR4GTKmgUdfe/tunnckoCore/detect-next-version">
-  <img alt="Sponsor" width="888" height="68" src="https://app.codesponsor.io/embed/K7yYzzA5nb2ZDR4GTKmgUdfe/tunnckoCore/detect-next-version.svg" />
-</a>
-<p></p>-->
-
 [![All Contributors Spec][all-contributors-img]](#contributors) 
 [![Make A Pull Request][prs-welcome-img]][prs-welcome-url] 
 [![Newsletter Subscribe][tinyletter-img]][tinyletter-url] 
@@ -71,18 +65,13 @@ See available bundles at [`https://unpkg.com/detect-next-version/dist/browser/`]
 ## API
 Review carefully the provided examples and the working [tests](./test).
 
-### [detectNextVersion](src/index.js#L48)
+### [detectNextVersion](src/index.js#L33)
 > Parses given `commitMessage` and returns an **"increment" type**, like `'patch'`, `'minor'` or `'major'`. That's useful to be passed to the [semver][]'s `inc()` method (see below example).
-
-> If you pass `full` param, then a **"commit" object** will be return,
-which comes directly from [parse-commit-message][] and contains few properties
-like `type`, `scope`, `subject`, `increment`, `body`, `isBreaking` and etc.
 
 **Params**
 
 * `commitMessage` **{string}**: a single commit message, including the new lines    
-* `full` **{boolean}**: pass `true` if you want to get commit object, instead of increment type    
-* `returns` **{string|Object}**: if string it is **"increment" type**, otherwise **"commit" object**  
+* `returns` **{string}**: it is **"increment" type**, as coming from [parse-commit-message][]  
 
 **Example**
 
@@ -90,23 +79,13 @@ like `type`, `scope`, `subject`, `increment`, `body`, `isBreaking` and etc.
 const semver = require('semver')
 const detectNext = require('detect-next-version')
 
-const commitMessage = 'fix(ng-list): updates the list order, thanks @hercules'
+const commitMessage = 'feat(ng-list): updates the list order, thanks @hercules'
 
 const increment = detectNext(commitMessage)
 console.log(increment) // => minor
 
-const commit = detectNext(commitMessage, true)
-// => { type: 'fix',
-// scope: 'ng-list',
-// subject: 'updates the list order, thanks @hercules',
-// header: 'fix(ng-list): updates the list order, thanks @hercules',
-// body: null,
-// footer: null,
-// increment: 'patch',
-// isBreaking: false }
-
-const nextVersion = semver.inc('1.1.0', commit.increment)
-console.log(nextVersion) // => 1.1.1
+const nextVersion = semver.inc('1.1.0', increment)
+console.log(nextVersion) // => 1.2.0
 ```
 
 **[back to top](#thetop)**
@@ -116,7 +95,7 @@ Some of these projects are used here or were inspiration for this one, others ar
 - [dush](https://www.npmjs.com/package/dush): Microscopic & functional event emitter in ~350 bytes, extensible through plugins | [homepage](https://github.com/tunnckocore/dush#readme "Microscopic & functional event emitter in ~350 bytes, extensible through plugins")
 - [execa](https://www.npmjs.com/package/execa): A better `child_process` | [homepage](https://github.com/sindresorhus/execa#readme "A better `child_process`")
 - [gitcommit](https://www.npmjs.com/package/gitcommit): Simple, small and stable helper & prompter for submitting conventional commits | [homepage](https://github.com/tunnckoCore/gitcommit#readme "Simple, small and stable helper & prompter for submitting conventional commits")
-- [hela](https://www.npmjs.com/package/hela): Powerful & flexible task runner framework in 80 lines, based on execa… [more](https://github.com/tunnckoCore/hela#readme) | [homepage](https://github.com/tunnckoCore/hela#readme "Powerful & flexible task runner framework in 80 lines, based on execa. Supports presets, a la ESLint but for tasks & npm scripts")
+- [hela](https://www.npmjs.com/package/hela): Powerful & flexible task runner framework in 80 lines, based on [execa… [more](https://github.com/tunnckoCore/hela#readme) | [homepage](https://github.com/tunnckoCore/hela#readme "Powerful & flexible task runner framework in 80 lines, based on [execa][]. Supports shareable configs, a la ESLint")
 - [mri](https://www.npmjs.com/package/mri): Quickly scan for CLI flags and arguments | [homepage](https://github.com/lukeed/mri#readme "Quickly scan for CLI flags and arguments")
 - [p-map-series](https://www.npmjs.com/package/p-map-series): Map over promises serially | [homepage](https://github.com/sindresorhus/p-map-series#readme "Map over promises serially")
 - [parse-commit-message](https://www.npmjs.com/package/parse-commit-message): An extensible parser for commit message that follows Conventional Commits v1 spec | [homepage](https://github.com/tunnckoCore/parse-commit-message#readme "An extensible parser for commit message that follows Conventional Commits v1 spec")
@@ -142,7 +121,7 @@ Released under the [Apache-2.0 License][license-url].
 
 ***
 
-_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on November 14, 2017._  
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on February 12, 2018._  
 _Project scaffolded and managed with [hela][]._
 
 [hela]: https://github.com/tunnckoCore/hela
@@ -228,3 +207,4 @@ _Project scaffolded and managed with [hela][]._
 [highlighted-link]: https://ghub.now.sh/hela
 [author-link]: https://i.am.charlike.online
 
+[execa]: https://github.com/sindresorhus/execa

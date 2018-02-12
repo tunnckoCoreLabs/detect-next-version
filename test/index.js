@@ -4,7 +4,6 @@
  */
 
 const test = require('mukla')
-const isObject = require('isobject')
 const detectNextVersion = require('../src/index.js')
 
 test('return "patch" when "fix" type and scope "foo" given', (done) => {
@@ -46,18 +45,5 @@ test('return "major" when type is "break" or "major"', (done) => {
   test.strictEqual(result1, 'major')
   test.strictEqual(result2, 'major')
   test.strictEqual(result3, 'major')
-  done()
-})
-
-test('should return an "commit" object if second param is explicit true', (done) => {
-  const commit = detectNextVersion('fix(src): wooho\nmake it more generic', true)
-
-  test.strictEqual(isObject(commit), true)
-  test.strictEqual(commit.type, 'fix')
-  test.strictEqual(commit.scope, 'src')
-  test.strictEqual(commit.subject, 'wooho')
-  test.strictEqual(commit.header, 'fix(src): wooho')
-  test.strictEqual(commit.body, 'make it more generic')
-  test.strictEqual(commit.increment, 'patch')
   done()
 })
