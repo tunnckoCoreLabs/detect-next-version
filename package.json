@@ -26,7 +26,7 @@
     "parse-commit-message": "1.1.2"
   },
   "devDependencies": {
-    "eslint": "5.1.0",
+    "eslint": "5.2.0",
     "eslint-config-tunnckocore": "1.0.1",
     "hela": "2.0.10",
     "hela-config-tunnckocore": "3.0.26",
