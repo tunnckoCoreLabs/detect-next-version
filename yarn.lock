@@ -328,7 +328,7 @@ array-unique@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/array-unique/-/array-unique-0.3.2.tgz#a894b75d4bc4f6cd679ef3244a9fd8f46ae2d428"
 
-arrayify@1.0.0:
+arrayify@1.0.0, arrayify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/arrayify/-/arrayify-1.0.0.tgz#f06a98235b8ef14ca1995992411a9fefb4e49cfc"
 
@@ -590,6 +590,12 @@ collect-mentions@0.1.1:
   resolved "https://registry.yarnpkg.com/collect-mentions/-/collect-mentions-0.1.1.tgz#5fbb3d9e5a0fa4b458a46900b93d1aabd2647fd2"
   dependencies:
     mentions-regex "2.0.3"
+
+collect-mentions@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/collect-mentions/-/collect-mentions-1.0.2.tgz#30734fcb33cbf8999cf7fd6d9c3133045f0b4dcc"
+  dependencies:
+    mentions-regex "^2.0.3"
 
 collection-visit@^1.0.0:
   version "1.0.0"
@@ -2218,7 +2224,7 @@ mem@^1.1.0:
   dependencies:
     mimic-fn "^1.0.0"
 
-mentions-regex@2.0.3:
+mentions-regex@2.0.3, mentions-regex@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/mentions-regex/-/mentions-regex-2.0.3.tgz#442717a0048e53c2d2e2ae5e63a4e54a55ca9603"
 
@@ -2577,6 +2583,13 @@ parse-commit-message@1.1.2:
   dependencies:
     arrayify "1.0.0"
     collect-mentions "0.1.1"
+
+parse-commit-message@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/parse-commit-message/-/parse-commit-message-2.0.2.tgz#79ccffb1e78a8e652400ddef34aa0e0568cac94d"
+  dependencies:
+    arrayify "^1.0.0"
+    collect-mentions "^1.0.1"
 
 parse-git-log@0.2.1:
   version "0.2.1"
