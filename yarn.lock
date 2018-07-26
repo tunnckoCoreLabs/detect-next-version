@@ -2584,9 +2584,9 @@ parse-commit-message@1.1.2:
     arrayify "1.0.0"
     collect-mentions "0.1.1"
 
-parse-commit-message@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/parse-commit-message/-/parse-commit-message-2.0.2.tgz#79ccffb1e78a8e652400ddef34aa0e0568cac94d"
+parse-commit-message@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/parse-commit-message/-/parse-commit-message-2.0.3.tgz#28245cb7ef3d223dd234b6f65c5d5f06b185b02a"
   dependencies:
     arrayify "^1.0.0"
     collect-mentions "^1.0.1"

@@ -23,7 +23,7 @@
     "src/"
   ],
   "dependencies": {
-    "parse-commit-message": "2.0.2"
+    "parse-commit-message": "2.0.3"
   },
   "devDependencies": {
     "eslint": "5.2.0",
