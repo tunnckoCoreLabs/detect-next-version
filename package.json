@@ -32,7 +32,7 @@
   "main": "index.js",
   "module": "src/index.js",
   "typings": "src/index.d.ts",
-  "version": "3.0.0-next.rc5",
+  "version": "3.0.0-next.rc6",
   "repository": "tunnckoCoreLabs/detect-next-version",
   "homepage": "https://github.com/tunnckoCoreLabs/detect-next-version",
   "author": "Charlike Mike Reagent (https://tunnckocore.com)",
