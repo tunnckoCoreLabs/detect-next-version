@@ -1,35 +1,44 @@
-/**
- * @copyright 2017-present, Charlike Mike Reagent <olsten.larck@gmail.com>
- * @license Apache-2.0
- */
+import recommendedBump from 'recommended-bump';
+import packageJson from '@tunnckocore/package-json';
+import increment from './semver-inc';
 
-const { parse, mappers } = require('parse-commit-message')
+export default async function detector(name, commitMessages, options = {}) {
+  const opts = Object.assign({}, options);
 
-/**
- * > Parses given `commitMessage` and returns an **"increment" type**,
- * like `'patch'`, `'minor'` or `'major'`. That's useful to be passed
- * to the [semver][]'s `inc()` method (see below example).
- *
- * **Example**
- *
- * ```js
- * const semver = require('semver')
- * const detectNext = require('detect-next-version')
- *
- * const commitMessage = 'feat(ng-list): updates the list order, thanks @hercules'
- *
- * const increment = detectNext(commitMessage)
- * console.log(increment) // => minor
- *
- * const nextVersion = semver.inc('1.1.0', increment)
- * console.log(nextVersion) // => 1.2.0
- * ```
- *
- * @param  {string} `commitMessage` a single commit message, including the new lines
- * @return {string} it is **"increment" type**, as coming from [parse-commit-message][]
- * @api public
- */
+  if (typeof name !== 'string') {
+    throw new TypeError('expect `name` to be string');
+  }
+  const commits = [].concat(commitMessages).filter(Boolean);
 
-module.exports = function detectNextVersion (commitMessage) {
-  return parse(commitMessage, mappers.increment).increment
+  if (commits.length === 0) {
+    throw new TypeError(
+      'expect `commitMessages` to be string or array of strings',
+    );
+  }
+
+  const pkg = await packageJson(name, opts.endpoint);
+  const recommended = recommendedBump(commits, opts.plugins);
+  const lastVersion = pkg.version;
+
+  if (!recommended.increment) {
+    return Object.assign({}, recommended, { pkg, lastVersion });
+  }
+
+  const nextVersion = increment(lastVersion, recommended.increment);
+
+  return Object.assign({}, recommended, { pkg, lastVersion, nextVersion });
 }
+
+// async function main() {
+//   const res = await detector('@hela/cli', [
+//     'chore: woohoo\n\nBREAKING CHANGE: unexpected breakage should happen',
+//     'fix: foo bar baz'
+//   ])
+
+//   console.log(res)
+//   // => res.increment === 'major' (because has "BREAKING CHANGE")
+//   // => res.lastVersion === '0.2.1'
+//   // => res.nextVersion === '1.0.0'
+// }
+
+// main()
