@@ -48,7 +48,8 @@
     "toc": {
       "render": true,
       "method": "preWrite",
-      "maxdepth": 4
+      "maxdepth": 4,
+      "footer": ""
     },
     "layout": "empty",
     "tasks": [
@@ -56,23 +57,28 @@
     ],
     "related": {
       "list": [
-        "dush",
-        "p-map-series",
         "execa",
-        "hela",
+        "charlike",
         "gitcommit",
-        "parse-git-log",
-        "parse-commit-message",
-        "mri"
-      ],
-      "highlight": "hela"
+        "@tunnckocore/create-github-repo",
+        "@tunnckocore/create-project",
+        "@tunnckocore/package-json",
+        "@tunnckocore/execa",
+        "@tunnckocore/update",
+        "@tunnckocore/scripts",
+        "@tunnckocore/config",
+        "recommended-bump"
+      ]
     },
     "lint": {
       "reflinks": true
     },
     "reflinks": [
       "new-release",
-      "semantic-release"
+      "semantic-release",
+      "execa",
+      "parse-commit-message",
+      "recommended-bump"
     ]
   }
 }
