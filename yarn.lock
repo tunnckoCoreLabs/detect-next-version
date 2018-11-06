@@ -3207,10 +3207,10 @@ readable-stream@^2.0.0:
     string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
 
-recommended-bump@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/recommended-bump/-/recommended-bump-1.0.1.tgz#d476ba482e318e60837d2936ff6a65ba640a35e1"
-  integrity sha512-mBQcJEXU0ccCIov7y7aT0wwTyzj5wYlHqrw3+f7TLNnZxPF/8drdsIq6nrpmRf6CdXsw4qF0VAQ0mE9FmleXRQ==
+recommended-bump@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/recommended-bump/-/recommended-bump-1.2.0.tgz#50eb5a22e0a6c04e78a9dad133063724bfa83dd7"
+  integrity sha512-LbADFBSq6i+jfatugYtYJ7PX3R4H7tEx25uZ2DjMwps6LV6HdR1sAXbwMzgAnfzkmFB6V1eL6GK/H5Q5Rx56ew==
   dependencies:
     esm "^3.0.84"
     parse-commit-message "^2.1.4"

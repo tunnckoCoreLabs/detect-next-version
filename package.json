@@ -18,7 +18,7 @@
     "@tunnckocore/package-json": "^1.0.1",
     "esm": "^3.0.84",
     "parse-commit-message": "1.1.2",
-    "recommended-bump": "^1.0.1"
+    "recommended-bump": "^1.2.0"
   },
   "devDependencies": {
     "@tunnckocore/config": "^0.5.1",

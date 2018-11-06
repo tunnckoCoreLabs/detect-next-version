@@ -14,6 +14,18 @@ import increment from './semver-inc';
  * or containing `BREAKING CHANGE:` label (e.g. the `chore` type), then the
  * returned result won't have `nextVersion` and `increment` will be `false`.
  *
+ * @example ts
+ * type Commit = {
+ *   header: {
+ *     type: string,
+ *     scope: string,
+ *     subject: string,
+ *     toString: Function,
+ *   },
+ *   body: string | null,
+ *   footer: string | null
+ * }
+ *
  * @example
  * import detector from 'detect-next-version';
  *
@@ -34,10 +46,25 @@ import increment from './semver-inc';
  *
  * main().catch(console.error);
  *
+ * @example
+ * import { parse, plugins } from 'parse-commit-message';
+ * import detectNextVersion from 'detect-next-version';
+ *
+ * async function main() {
+ *   const commitOne = parse('fix: foo bar', plugins);
+ *   const commitTwo = parse('feat: some feature subject', plugins);
+ *
+ *   const result = detectNextVersion('@my-org/my-awesomepkg', [commitOne, commitTwo]);
+ *   console.log(result.increment); // => 'minor'
+ * }
+ *
+ * main().catch(console.error);
+ *
  * @name detectNextVersion
  * @public
  * @param {string} name a package name which you looking to update
- * @param {string|string[]} commitMessages commit messages since last version
+ * @param {string|string[]} commits directly passed to [recommended-bump][]
+ *                          May be one of `string`, `Array<string>` or `Array<Commit>`
  * @param {object} [options={}] optional, passed to above mentioned packages.
  * @returns {object} an object which is basically the return of [recommended-bump][]
  *                  plus `{ pkg, lastVersion, nextVersion? }`.
