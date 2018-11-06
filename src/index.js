@@ -1,35 +1,70 @@
-/**
- * @copyright 2017-present, Charlike Mike Reagent <olsten.larck@gmail.com>
- * @license Apache-2.0
- */
-
-const { parse, mappers } = require('parse-commit-message')
+import recommendedBump from 'recommended-bump';
+import packageJson from '@tunnckocore/package-json';
+import increment from './semver-inc';
 
 /**
- * > Parses given `commitMessage` and returns an **"increment" type**,
- * like `'patch'`, `'minor'` or `'major'`. That's useful to be passed
- * to the [semver][]'s `inc()` method (see below example).
+ * Calculates next version of given package with `name`,
+ * based given `commitMessages` which should follow
+ * the [Conventional Commits Specification](https://www.conventionalcommits.org/).
+ * Options are passed directly to [@tunnckocore/package-json](https://ghub.io/@tunnckocore/package-json) and
+ * [recommended-bump][] packages. Also because the recommended-bump, you can
+ * pass `options.plugins` which will be passed to [parse-commit-message][]
+ * commit message parser. So follow their docs and see the tests here for
+ * example usage. If all commit messages are of type that is not `patch|fix|minor|feat|major`
+ * or containing `BREAKING CHANGE:` label (e.g. the `chore` type), then the
+ * returned result won't have `nextVersion` and `increment` will be `false`.
  *
- * **Example**
+ * @example
+ * import detector from 'detect-next-version';
  *
- * ```js
- * const semver = require('semver')
- * const detectNext = require('detect-next-version')
+ * async function main() {
+ *   const commits = ['chore(ci): some build tweaks', 'fix(cli): foo bar'];
  *
- * const commitMessage = 'feat(ng-list): updates the list order, thanks @hercules'
+ *   // consider `my-npm-package` is version 0.1.0
+ *   const result = await detector('my-npm-package', commits);
+ *   console.log(result.increment); // => 'patch'
+ *   console.log(result.pkg); // => package's latest package.json metadata
+ *   console.log(result.lastVersion); // => '0.1.0'
+ *   console.log(result.nextVersion); // => '0.1.1'
+ *   console.log(result.patch[0].header.type); // => 'fix'
+ *   console.log(result.patch[0].header.scope); // => 'cli'
+ *   console.log(result.patch[0].header.subject); // => 'foobar'
+ *   console.log(result.patch[0].header.toString()); // => 'fix(cli): foobar'
+ * }
  *
- * const increment = detectNext(commitMessage)
- * console.log(increment) // => minor
+ * main().catch(console.error);
  *
- * const nextVersion = semver.inc('1.1.0', increment)
- * console.log(nextVersion) // => 1.2.0
- * ```
- *
- * @param  {string} `commitMessage` a single commit message, including the new lines
- * @return {string} it is **"increment" type**, as coming from [parse-commit-message][]
- * @api public
+ * @name detectNextVersion
+ * @public
+ * @param {string} name a package name which you looking to update
+ * @param {string|string[]} commitMessages commit messages since last version
+ * @param {object} [options={}] optional, passed to above mentioned packages.
+ * @returns {object} an object which is basically the return of [recommended-bump][]
+ *                  plus `{ pkg, lastVersion, nextVersion? }`.
  */
+export default async function detector(name, commitMessages, options = {}) {
+  const opts = Object.assign({}, options);
 
-module.exports = function detectNextVersion (commitMessage) {
-  return parse(commitMessage, mappers.increment).increment
+  if (typeof name !== 'string') {
+    throw new TypeError('expect `name` to be string');
+  }
+  const commits = [].concat(commitMessages).filter(Boolean);
+
+  if (commits.length === 0) {
+    throw new TypeError(
+      'expect `commitMessages` to be string or array of strings',
+    );
+  }
+
+  const pkg = await packageJson(name, opts.endpoint);
+  const recommended = recommendedBump(commits, opts.plugins);
+  const lastVersion = pkg.version;
+
+  if (!recommended.increment) {
+    return Object.assign({}, recommended, { pkg, lastVersion });
+  }
+
+  const nextVersion = increment(lastVersion, recommended.increment);
+
+  return Object.assign({}, recommended, { pkg, lastVersion, nextVersion });
 }

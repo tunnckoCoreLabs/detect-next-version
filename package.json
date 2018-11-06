@@ -1,46 +1,55 @@
 {
   "name": "detect-next-version",
-  "version": "0.0.0-semantic-release-app",
   "description": "Calculates next version, based on given commit message and following Conventional Commits",
-  "repository": "tunnckoCore/detect-next-version",
-  "author": "Charlike Mike Reagent (https://i.am.charlike.online)",
-  "nspId": "d0aea59c-0e09-42ac-bd67-2c48f22c5226",
-  "main": "./src/index.js",
-  "scripts": {
-    "test": "NODE_ENV=test yarn hela test",
-    "precommit": "yarn hela precommit",
-    "commit": "yarn hela commit",
-    "prepublishOnly": "yarn hela protect"
-  },
   "license": "Apache-2.0",
-  "licenseStart": 2017,
-  "engines": {
-    "node": ">=8",
-    "npm": ">=5",
-    "yarn": ">=1"
+  "licenseStart": "2017",
+  "scripts": {
+    "start": "tunnckocore-scripts",
+    "extends": "@tunnckocore/config/scripts",
+    "docs": "tunnckocore-scripts docs",
+    "lint": "tunnckocore-scripts lint",
+    "test": "tunnckocore-scripts test",
+    "commit": "tunnckocore-scripts commit"
   },
-  "files": [
-    "src/"
-  ],
+  "engines": {
+    "node": "^8.11.0 || >=10.13.0"
+  },
   "dependencies": {
-    "parse-commit-message": "2.1.4"
+    "@tunnckocore/package-json": "^1.0.1",
+    "esm": "^3.0.84",
+    "parse-commit-message": "1.1.2",
+    "recommended-bump": "^1.0.1"
   },
   "devDependencies": {
-    "eslint": "5.7.0",
-    "eslint-config-tunnckocore": "1.0.1",
-    "hela": "2.0.10",
-    "hela-config-tunnckocore": "3.0.26",
-    "mukla": "0.4.9"
+    "@tunnckocore/config": "^0.5.1",
+    "@tunnckocore/scripts": "^1.1.0",
+    "asia": "^0.19.7"
   },
-  "keywords": [
-    "automation"
+  "files": [
+    "src",
+    "index.js"
   ],
+  "main": "index.js",
+  "module": "src/index.js",
+  "typings": "src/index.d.ts",
+  "version": "3.0.0",
+  "repository": "tunnckoCoreLabs/detect-next-version",
+  "homepage": "https://github.com/tunnckoCoreLabs/detect-next-version",
+  "author": "Charlike Mike Reagent (https://tunnckocore.com)",
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "renovate": {
+    "extends": "tunnckocore"
+  },
   "verb": {
     "run": true,
     "toc": {
       "render": true,
       "method": "preWrite",
-      "maxdepth": 3
+      "maxdepth": 4,
+      "footer": ""
     },
     "layout": "empty",
     "tasks": [
@@ -48,24 +57,28 @@
     ],
     "related": {
       "list": [
-        "dush",
-        "p-map-series",
         "execa",
-        "hela",
+        "charlike",
         "gitcommit",
-        "parse-git-log",
-        "parse-commit-message",
-        "mri"
-      ],
-      "highlight": "hela"
+        "@tunnckocore/create-github-repo",
+        "@tunnckocore/create-project",
+        "@tunnckocore/package-json",
+        "@tunnckocore/execa",
+        "@tunnckocore/update",
+        "@tunnckocore/scripts",
+        "@tunnckocore/config",
+        "recommended-bump"
+      ]
     },
     "lint": {
       "reflinks": true
     },
     "reflinks": [
-      "hela",
+      "new-release",
+      "semantic-release",
+      "execa",
       "parse-commit-message",
-      "semver"
+      "recommended-bump"
     ]
   }
 }

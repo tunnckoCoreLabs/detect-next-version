@@ -1,49 +1,49 @@
-/**
- * @copyright 2017-present, Charlike Mike Reagent <olsten.larck@gmail.com>
- * @license Apache-2.0
- */
+import test from 'asia';
+import detectNextVersion from '../src';
+import semverIncrement from '../src/semver-inc';
 
-const test = require('mukla')
-const detectNextVersion = require('../src/index.js')
+test('next version is minor', async (t) => {
+  const result = await detectNextVersion('@tunnckocore/package-json', [
+    'fix: some foo bar',
+    'feat(fake): ok dude',
+    'chore(ci): tweaks',
+  ]);
 
-test('return "patch" when "fix" type and scope "foo" given', (done) => {
-  const res = detectNextVersion('fix(foo): bar qux')
+  const { increment, pkg, lastVersion, nextVersion } = result;
 
-  test.strictEqual(res, 'patch')
-  done()
-})
+  t.strictEqual(increment, 'minor');
+  t.strictEqual(pkg.version, lastVersion);
+  t.strictEqual(nextVersion, semverIncrement(lastVersion, increment));
+});
 
-test('return "major" when "fix" type and has "BREAKING CHANGE" in body', (done) => {
-  const increment = detectNextVersion(`fix(src): some very important change
-BREAKING CHANGE: we are awesome`)
+test('throw if no package name is given or not string', async (t) => {
+  try {
+    await detectNextVersion();
+  } catch (err) {
+    t.ok(err);
+    t.strictEqual(err.message, 'expect `name` to be string');
+  }
+});
 
-  test.strictEqual(increment, 'major')
-  done()
-})
+test('throw if no commit messages are given', async (t) => {
+  try {
+    await detectNextVersion('@tunnckocore/qq5');
+  } catch (err) {
+    t.ok(err);
+    t.ok(err.message.includes('expect `commitMessages` to be string or array'));
+  }
+});
 
-test('return "minor" when "feat" type and no scope', (done) => {
-  const inc = detectNextVersion('feat: woohoo, awesome')
+test('dont give `result.nextVersion` when only "chore" commits', async (t) => {
+  const result = await detectNextVersion('@tunnckocore/qq5', [
+    'chore: foo bar baz',
+    'chore(ci): some build fix',
+  ]);
 
-  test.strictEqual(inc, 'minor')
-  done()
-})
+  t.strictEqual(result.increment, false);
+  t.strictEqual(result.lastVersion, '0.0.0');
 
-test('return "major" when detect "BREAKING CHANGE" in header', (done) => {
-  const next = detectNextVersion('fix: BREAKING CHANGE: require node 8')
-  test.strictEqual(next, 'major')
-
-  const incr = detectNextVersion('fix(quxie): BREAKING CHANGE: require node 8')
-  test.strictEqual(incr, 'major')
-  done()
-})
-
-test('return "major" when type is "break" or "major"', (done) => {
-  const result1 = detectNextVersion('break(source): require node 8')
-  const result2 = detectNextVersion('major(source): require node 8')
-  const result3 = detectNextVersion('major: require node 8')
-
-  test.strictEqual(result1, 'major')
-  test.strictEqual(result2, 'major')
-  test.strictEqual(result3, 'major')
-  done()
-})
+  const hasOwn = (key) => Object.prototype.hasOwnProperty.call(result, key);
+  t.strictEqual(hasOwn(result, 'nextVersion'), false);
+  t.strictEqual(result.nextVersion, undefined);
+});
