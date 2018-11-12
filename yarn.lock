@@ -614,7 +614,7 @@ collect-mentions@0.1.1:
   dependencies:
     mentions-regex "2.0.3"
 
-collect-mentions@^1.0.1:
+collect-mentions@^1.0.1, collect-mentions@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/collect-mentions/-/collect-mentions-1.0.2.tgz#30734fcb33cbf8999cf7fd6d9c3133045f0b4dcc"
   integrity sha512-/jRhzWp5bkZnvgtR+agXT0RvYKBXOl4uG+eKA6ip3tp1x+jRAV36jW2TceKutOeuEPjHKaQ6DJjeh5zvZF0fWQ==
@@ -793,6 +793,11 @@ decompress-response@^3.3.0:
   integrity sha1-gKTdMjdIOEv6JICDYirt7Jgq3/M=
   dependencies:
     mimic-response "^1.0.0"
+
+dedent@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/dedent/-/dedent-0.7.0.tgz#2495ddbaf6eb874abb0e1be9df22d2e5a544326c"
+  integrity sha1-JJXduvbrh0q7Dhvp3yLS5aVEMmw=
 
 deep-extend@^0.6.0:
   version "0.6.0"
@@ -2521,6 +2526,11 @@ mixin-deep@^1.2.0:
     for-in "^1.0.2"
     is-extendable "^1.0.1"
 
+mixin-deep@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/mixin-deep/-/mixin-deep-2.0.0.tgz#9dfd525156720ec6cbee14fcb4b968253ba358ee"
+  integrity sha512-2tAhDtV+OCFCeknyf2cJD5rD+xfvM2ax/RZ3iI1G67Eh6x5UxKJlGDVpmCX27y7WvuXpAkMHQs9ooaxIHIit+A==
+
 mkdirp@^0.5.0, mkdirp@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
@@ -2878,6 +2888,16 @@ parse-commit-message@1.1.2:
   dependencies:
     arrayify "1.0.0"
     collect-mentions "0.1.1"
+
+parse-commit-message@3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/parse-commit-message/-/parse-commit-message-3.2.0.tgz#8065d006e9e4b273889130067ae435b8986508a6"
+  integrity sha512-LzkHT+I2cG+3v0iGnMNPda4qdZoTjiz40rOEdo7pd7gpE4YHXFDvF4dj2LuoMQX7Ykb3WlKZBfwLSKFHASvjGw==
+  dependencies:
+    collect-mentions "^1.0.2"
+    dedent "^0.7.0"
+    esm "^3.0.84"
+    mixin-deep "^2.0.0"
 
 parse-commit-message@^2.1.4:
   version "2.1.4"
