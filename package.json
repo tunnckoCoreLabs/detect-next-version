@@ -4,12 +4,12 @@
   "license": "Apache-2.0",
   "licenseStart": "2017",
   "scripts": {
-    "start": "tunnckocore-scripts",
-    "extends": "@tunnckocore/config/scripts",
-    "docs": "tunnckocore-scripts docs",
-    "lint": "tunnckocore-scripts lint",
-    "test": "tunnckocore-scripts test",
-    "commit": "tunnckocore-scripts commit"
+    "docs": "docks --outfile .verb.md && verb",
+    "lint": "eslint '**/*.js' --cache --fix --quiet --format codeframe",
+    "test": "nyc asia",
+    "commit": "yarn lint && yarn test && yarn dry",
+    "dry": "git add -A && git status --porcelain && gitcommit -sS",
+    "release": "tunnckocore-release"
   },
   "engines": {
     "node": "^8.11.0 || >=10.13.0"
@@ -17,12 +17,10 @@
   "dependencies": {
     "@tunnckocore/package-json": "^1.0.1",
     "esm": "^3.0.84",
-    "parse-commit-message": "1.1.2",
-    "recommended-bump": "^1.2.0"
+    "recommended-bump": "^1.3.0"
   },
   "devDependencies": {
-    "@tunnckocore/config": "^0.5.1",
-    "@tunnckocore/scripts": "^1.1.0",
+    "@tunnckocore/config": "^1.0.2",
     "asia": "^0.19.7"
   },
   "files": [
@@ -32,7 +30,7 @@
   "main": "index.js",
   "module": "src/index.js",
   "typings": "src/index.d.ts",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "repository": "tunnckoCoreLabs/detect-next-version",
   "homepage": "https://github.com/tunnckoCoreLabs/detect-next-version",
   "author": "Charlike Mike Reagent (https://tunnckocore.com)",
@@ -48,8 +46,7 @@
     "toc": {
       "render": true,
       "method": "preWrite",
-      "maxdepth": 4,
-      "footer": ""
+      "maxdepth": 4
     },
     "layout": "empty",
     "tasks": [
@@ -57,16 +54,9 @@
     ],
     "related": {
       "list": [
-        "execa",
-        "charlike",
         "gitcommit",
-        "@tunnckocore/create-github-repo",
-        "@tunnckocore/create-project",
-        "@tunnckocore/package-json",
-        "@tunnckocore/execa",
-        "@tunnckocore/update",
-        "@tunnckocore/scripts",
-        "@tunnckocore/config",
+        "git-commits-since",
+        "parse-commit-message",
         "recommended-bump"
       ]
     },
@@ -76,7 +66,6 @@
     "reflinks": [
       "new-release",
       "semantic-release",
-      "execa",
       "parse-commit-message",
       "recommended-bump"
     ]

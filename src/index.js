@@ -14,17 +14,17 @@ import increment from './semver-inc';
  * or containing `BREAKING CHANGE:` label (e.g. the `chore` type), then the
  * returned result won't have `nextVersion` and `increment` will be `false`.
  *
+ * ProTip: See [parse-commit-message types](https://github.com/tunnckoCoreLabs/parse-commit-message#type-definitions) documentation!
+ *
  * @example ts
  * type Commit = {
- *   header: {
- *     type: string,
- *     scope: string,
- *     subject: string,
- *     toString: Function,
- *   },
- *   body: string | null,
- *   footer: string | null
- * }
+ *   header: Header;
+ *   body?: string | null;
+ *   footer?: string | null;
+ *   increment?: string | boolean;
+ *   isBreaking?: boolean;
+ *   mentions?: Array<Mention>;
+ * };
  *
  * @example
  * import detector from 'detect-next-version';
@@ -47,14 +47,14 @@ import increment from './semver-inc';
  * main().catch(console.error);
  *
  * @example
- * import { parse, plugins } from 'parse-commit-message';
- * import detectNextVersion from 'detect-next-version';
+ * import { parse } from 'parse-commit-message';
+ * import detector from 'detect-next-version';
  *
  * async function main() {
- *   const commitOne = parse('fix: foo bar', plugins);
- *   const commitTwo = parse('feat: some feature subject', plugins);
+ *   const commitOne = parse('fix: foo bar');
+ *   const commitTwo = parse('feat: some feature subject');
  *
- *   const result = detectNextVersion('@my-org/my-awesomepkg', [commitOne, commitTwo]);
+ *   const result = await detector('@my-org/my-awesomepkg', [commitOne, commitTwo]);
  *   console.log(result.increment); // => 'minor'
  * }
  *
@@ -69,22 +69,22 @@ import increment from './semver-inc';
  * @returns {object} an object which is basically the return of [recommended-bump][]
  *                  plus `{ pkg, lastVersion, nextVersion? }`.
  */
-export default async function detector(name, commitMessages, options = {}) {
+export default async function detector(name, commits, options = {}) {
   const opts = Object.assign({}, options);
 
   if (typeof name !== 'string') {
     throw new TypeError('expect `name` to be string');
   }
-  const commits = [].concat(commitMessages).filter(Boolean);
+  const cmts = [].concat(commits).filter(Boolean);
 
-  if (commits.length === 0) {
+  if (cmts.length === 0) {
     throw new TypeError(
-      'expect `commitMessages` to be string or array of strings',
+      'expect `commits` to be string, array of strings or array of objects',
     );
   }
 
   const pkg = await packageJson(name, opts.endpoint);
-  const recommended = recommendedBump(commits, opts.plugins);
+  const recommended = recommendedBump(cmts, opts.plugins);
   const lastVersion = pkg.version;
 
   if (!recommended.increment) {
