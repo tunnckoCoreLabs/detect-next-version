@@ -19,7 +19,7 @@
   "dependencies": {
     "@tunnckocore/package-json": "^2.0.0",
     "esm": "^3.0.84",
-    "recommended-bump": "^1.3.0"
+    "recommended-bump": "^2.0.0"
   },
   "devDependencies": {
     "@tunnckocore/config": "^1.0.2",
