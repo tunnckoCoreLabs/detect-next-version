@@ -7,7 +7,7 @@
     "docs": "docks --outfile .verb.md && verb",
     "lint": "eslint '**/*.js' --cache --fix --quiet --format codeframe",
     "test-only": "node -r esm test/index.js",
-    "test": "nyc node test/index.js",
+    "test": "nyc --require esm node test/index.js",
     "precommit": "yarn run lint && yarn run test-only",
     "commit": "yarn dry",
     "dry": "git add -A && git status --porcelain && gitcommit",

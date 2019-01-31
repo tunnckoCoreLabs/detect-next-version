@@ -83,7 +83,10 @@ export default async function detector(commits, options) {
   }
 
   if (opts.packages && opts.name) {
-    throw new Error('The opts.packages and opts.name cannot work together');
+    throw new Error('The `opts.packages` and `opts.name` cannot work together');
+  }
+  if (opts.packages && !opts.cwd) {
+    throw new Error('expect `opts.cwd` when `opts.packages` is given');
   }
 
   if (opts.packages) {
@@ -98,37 +101,46 @@ export default async function detector(commits, options) {
      */
     return arrayify(opts.packages)
       .filter(Boolean)
-      .reduce((acc, name) => {
-        // when package is scoped, it's considered that the scope is
-        // a directory inside the root (cwd) of monorepo.
-        const path = name.startsWith('@') ? name : `packages/${name}`;
-        const [result] = detector(commits, { name, endpoint, plugins, cwd });
+      .reduce(
+        (promise, name) =>
+          promise.then(async (acc) => {
+            // when package is scoped, it's considered that the scope is
+            // a directory inside the root (cwd) of monorepo.
+            const path = name.startsWith('@') ? name : `packages/${name}`;
+            const [result] = await detector(commits, {
+              name,
+              endpoint,
+              plugins,
+              cwd,
+            });
 
-        /**
-         * Use `path.join(item.cwd, item.path)` to access package place.
-         *
-         * [{
-         *   name: 'foo-bar',
-         *   path: 'packages/foo-bar',
-         *   cwd: '/home/foo/bar/develop',
-         *   increment: 'minor',
-         *   isBreaking: false,
-         *   lastVersion: '1.1.1',
-         *   nextVersion: '1.2.0',
-         *   pkg: pkgJson,
-         * }, {
-         *   name: '@tunnckocore/barry',
-         *   path: '@tunnckocore/barry',
-         *   cwd: '/home/foo/bar/develop',
-         *   increment: 'major',
-         *   isBreaking: true,
-         *   lastVersion: '1.5.10',
-         *   nextVersion: '2.0.0',
-         *   pkg: pkgJson,
-         * }]
-         */
-        return acc.concat(Object.assign({ name, path, cwd }, result));
-      }, []);
+            /**
+             * Use `path.join(item.cwd, item.path)` to access package place.
+             *
+             * [{
+             *   name: 'foo-bar',
+             *   path: 'packages/foo-bar',
+             *   cwd: '/home/foo/bar/develop',
+             *   increment: 'minor',
+             *   isBreaking: false,
+             *   lastVersion: '1.1.1',
+             *   nextVersion: '1.2.0',
+             *   pkg: pkgJson,
+             * }, {
+             *   name: '@tunnckocore/barry',
+             *   path: '@tunnckocore/barry',
+             *   cwd: '/home/foo/bar/develop',
+             *   increment: 'major',
+             *   isBreaking: true,
+             *   lastVersion: '1.5.10',
+             *   nextVersion: '2.0.0',
+             *   pkg: pkgJson,
+             * }]
+             */
+            return acc.concat(Object.assign({ name, path, cwd }, result));
+          }),
+        Promise.resolve([]),
+      );
   }
   if (!isValidString(opts.name)) {
     throw new TypeError('expect `opts.name` to be non empty string');
@@ -161,6 +173,7 @@ export default async function detector(commits, options) {
   ];
 }
 
+/* istanbul ignore next */
 function arrayify(val) {
   if (!val) return [];
   if (Array.isArray(val)) return val;

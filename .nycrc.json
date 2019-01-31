@@ -5,7 +5,6 @@
   "lines": 0,
   "cache": true,
   "check-coverage": true,
-  "require": "esm",
   "reporter": ["lcov", "text"],
   "include": ["src/**/*.js"],
   "exclude": ["test", "src/semver-inc/**/*"]
