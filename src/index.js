@@ -33,7 +33,7 @@ import increment from './semver-inc';
  *   const commits = ['chore(ci): some build tweaks', 'fix(cli): foo bar'];
  *
  *   // consider `my-npm-package` is version 0.1.0
- *   const result = await detector('my-npm-package', commits);
+ *   const [result] = await detector(commits, { name: 'my-npm-package' });
  *   console.log(result.increment); // => 'patch'
  *   console.log(result.pkg); // => package's latest package.json metadata
  *   console.log(result.lastVersion); // => '0.1.0'
@@ -54,7 +54,11 @@ import increment from './semver-inc';
  *   const commitOne = parse('fix: foo bar');
  *   const commitTwo = parse('feat: some feature subject');
  *
- *   const result = await detector('@my-org/my-awesomepkg', [commitOne, commitTwo]);
+ *   // always an array, but we can destruct it here,
+ *   // because we know that it has only one item
+ *   const [result] = await detector([commitOne, commitTwo], {
+ *     name: '@my-org/my-awesomepkg'
+ *   });
  *   console.log(result.increment); // => 'minor'
  * }
  *
@@ -62,26 +66,90 @@ import increment from './semver-inc';
  *
  * @name detectNextVersion
  * @public
- * @param {string} name a package name which you looking to update
  * @param {string|string[]} commits directly passed to [recommended-bump][]
  *                          May be one of `string`, `Array<string>` or `Array<Commit>`
  * @param {object} [options={}] optional, passed to above mentioned packages.
- * @returns {object} an object which is basically the return of [recommended-bump][]
- *                  plus `{ pkg, lastVersion, nextVersion? }`.
+ * @returns {Array<object>} an array of objects where each is basically the return of [recommended-bump][]
+ *                  plus `{ pkg, name, cwd, path, lastVersion, nextVersion? }`.
  */
-export default async function detector(name, commits, options = {}) {
+export default async function detector(commits, options) {
   const opts = Object.assign({}, options);
-
-  if (typeof name !== 'string') {
-    throw new TypeError('expect `name` to be string');
-  }
-  const cmts = [].concat(commits).filter(Boolean);
+  const cmts = arrayify(commits).filter(Boolean);
 
   if (cmts.length === 0) {
     throw new TypeError(
       'expect `commits` to be string, array of strings or array of objects',
     );
   }
+
+  if (opts.packages && opts.name) {
+    throw new Error('The `opts.packages` and `opts.name` cannot work together');
+  }
+  if (opts.packages && !opts.cwd) {
+    throw new Error('expect `opts.cwd` when `opts.packages` is given');
+  }
+
+  if (opts.packages) {
+    const { endpoint, plugins, cwd } = opts;
+
+    /**
+     * Inside commit
+     *
+     * packages:
+     * - foo-bar
+     * - @tunnckocore/barry
+     */
+    return arrayify(opts.packages)
+      .filter(Boolean)
+      .reduce(
+        (promise, name) =>
+          promise.then(async (acc) => {
+            // when package is scoped, it's considered that the scope is
+            // a directory inside the root (cwd) of monorepo.
+            const path = name.startsWith('@') ? name : `packages/${name}`;
+            const [result] = await detector(commits, {
+              name,
+              endpoint,
+              plugins,
+              cwd,
+            });
+
+            /**
+             * Use `path.join(item.cwd, item.path)` to access package place.
+             *
+             * [{
+             *   name: 'foo-bar',
+             *   path: 'packages/foo-bar',
+             *   cwd: '/home/foo/bar/develop',
+             *   increment: 'minor',
+             *   isBreaking: false,
+             *   lastVersion: '1.1.1',
+             *   nextVersion: '1.2.0',
+             *   pkg: pkgJson,
+             * }, {
+             *   name: '@tunnckocore/barry',
+             *   path: '@tunnckocore/barry',
+             *   cwd: '/home/foo/bar/develop',
+             *   increment: 'major',
+             *   isBreaking: true,
+             *   lastVersion: '1.5.10',
+             *   nextVersion: '2.0.0',
+             *   pkg: pkgJson,
+             * }]
+             */
+            return acc.concat(Object.assign({ name, path, cwd }, result));
+          }),
+        Promise.resolve([]),
+      );
+  }
+  if (!isValidString(opts.name)) {
+    throw new TypeError('expect `opts.name` to be non empty string');
+  }
+
+  const { name, cwd } = opts;
+  // when package is scoped, it's considered that the scope is
+  // a directory inside the root (cwd) of monorepo.
+  const path = name.startsWith('@') ? name : `packages/${name}`;
 
   const pkg = await packageJson(name, opts.endpoint);
   const recommended = recommendedBump(cmts, opts.plugins);
@@ -93,5 +161,25 @@ export default async function detector(name, commits, options = {}) {
 
   const nextVersion = increment(lastVersion, recommended.increment);
 
-  return Object.assign({}, recommended, { pkg, lastVersion, nextVersion });
+  return [
+    Object.assign({}, recommended, {
+      name,
+      path,
+      cwd,
+      pkg,
+      lastVersion,
+      nextVersion,
+    }),
+  ];
+}
+
+/* istanbul ignore next */
+function arrayify(val) {
+  if (!val) return [];
+  if (Array.isArray(val)) return val;
+  return [val];
+}
+
+function isValidString(val) {
+  return val && typeof val === 'string' && val.length > 0;
 }

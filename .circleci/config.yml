@@ -107,7 +107,7 @@ jobs:
           command: yarn run build || echo "No build step."
       - run:
           name: Releasing and publishing
-          command: yarn run release || (yarn global add @tunnckocore/release-cli && yarn run release)
+          command: yarn run release || (yarn global add new-release@4 && yarn run release)
 
 workflows:
   version: 2
