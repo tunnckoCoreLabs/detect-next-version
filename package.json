@@ -11,7 +11,7 @@
     "precommit": "yarn run lint && yarn run test-only",
     "commit": "yarn dry",
     "dry": "git add -A && git status --porcelain && gitcommit",
-    "release": "standard-release"
+    "release": "new-release"
   },
   "resolutions": {
     "esm": "^3.2.0"
@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "asia": "^1.0.0-rc.31",
-    "docks": "^0.6.1",
+    "docks": "^0.6.3",
     "eslint": "^5.12.1",
     "eslint-config-tunnckocore": "^3.0.0",
     "prettier": "^1.16.1"

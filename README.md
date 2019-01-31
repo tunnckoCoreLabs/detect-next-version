@@ -70,7 +70,7 @@ _Generated using [docks](http://npm.im/docks)._
 
 ### [src/index.js](/src/index.js)
 
-#### [detectNextVersion](/src/index.js#L72)
+#### [detectNextVersion](/src/index.js#L75)
 Calculates next version of given package with `name`,
 based given `commitMessages` which should follow
 the [Conventional Commits Specification](https://www.conventionalcommits.org/).
@@ -85,14 +85,13 @@ returned result won't have `nextVersion` and `increment` will be `false`.
 ProTip: See [parse-commit-message types](https://github.com/tunnckoCoreLabs/parse-commit-message#type-definitions) documentation!
 
 **Params**
-- `name` **{string}** a package name which you looking to update
 - `commits` **{string|}** directly passed to [recommended-bump][]
                          May be one of `string`, `Array<string>` or `Array<Commit>`
 - `[options]` **{object}** optional, passed to above mentioned packages.
 
 **Returns**
-- `object` an object which is basically the return of [recommended-bump][]
-                 plus `{ pkg, lastVersion, nextVersion? }`.
+- `Array<object>` an array of objects where each is basically the return of [recommended-bump][]
+                 plus `{ pkg, name, cwd, path, lastVersion, nextVersion? }`.
 
 **Examples**
 ```ts
@@ -112,7 +111,7 @@ async function main() {
   const commits = ['chore(ci): some build tweaks', 'fix(cli): foo bar'];
 
   // consider `my-npm-package` is version 0.1.0
-  const result = await detector('my-npm-package', commits);
+  const [result] = await detector(commits, { name: 'my-npm-package' });
   console.log(result.increment); // => 'patch'
   console.log(result.pkg); // => package's latest package.json metadata
   console.log(result.lastVersion); // => '0.1.0'
@@ -133,7 +132,11 @@ async function main() {
   const commitOne = parse('fix: foo bar');
   const commitTwo = parse('feat: some feature subject');
 
-  const result = await detector('@my-org/my-awesomepkg', [commitOne, commitTwo]);
+  // always and array, but we can destruct it here,
+  // because we know that it has only one item
+  const [result] = await detector([commitOne, commitTwo], {
+    name: '@my-org/my-awesomepkg'
+  });
   console.log(result.increment); // => 'minor'
 }
 
@@ -251,7 +254,7 @@ Released under the [Apache-2.0 License][license-url].
 [shareb]: https://badgen.net/badge/twitter/share/1da1f2?icon=twitter
 [open-issue-url]: https://github.com/tunnckoCoreLabs/detect-next-version/issues/new
 
-[new-release]: https://github.com/tunnckoCore/new-release
+[new-release]: https://github.com/tunnckoCoreLabs/new-release
 [parse-commit-message]: https://github.com/tunnckoCoreLabs/parse-commit-message
 [recommended-bump]: https://github.com/tunnckoCoreLabs/recommended-bump
 [semantic-release]: https://github.com/semantic-release/semantic-release

@@ -580,14 +580,14 @@ define-property@^2.0.2:
     is-descriptor "^1.0.2"
     isobject "^3.0.1"
 
-docks@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/docks/-/docks-0.6.1.tgz#38416fd96d5d18ae4ca181190819218d7dad7771"
-  integrity sha512-wkzUtH6H7ctEDLS9v1Kc/0a6HXe76elL9WKtleI0jRwxd1Sh4EnAwlb49wmvVhuKNheWih0LVqh8g4/nMmWScA==
+docks@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/docks/-/docks-0.6.3.tgz#03f4559bdac22ddf06ece400bcaa28af1b11aa43"
+  integrity sha512-O1KJ6+FAVJ+U3DRwUB0zs2KxhT6J39UTWHjj6AYZtMUFtdJI7A6jLOwSf3QKk7qTo6I3dhL+YyiTqIPkr7v0pA==
   dependencies:
     "@babel/parser" "^7.1.3"
     doctrine "^3.0.0"
-    esm "^3.0.84"
+    esm "^3.2.0"
     fast-glob "^2.2.2"
     mkdirp "^0.5.1"
     mri "^1.1.1"
