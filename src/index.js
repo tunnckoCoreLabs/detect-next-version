@@ -134,7 +134,12 @@ export default async function detector(commits, options) {
     throw new TypeError('expect `opts.name` to be non empty string');
   }
 
-  const pkg = await packageJson(opts.name, opts.endpoint);
+  const { name, cwd } = opts;
+  // when package is scoped, it's considered that the scope is
+  // a directory inside the root (cwd) of monorepo.
+  const path = name.startsWith('@') ? name : `packages/${name}`;
+
+  const pkg = await packageJson(name, opts.endpoint);
   const recommended = recommendedBump(cmts, opts.plugins);
   const lastVersion = pkg.version;
 
@@ -144,7 +149,16 @@ export default async function detector(commits, options) {
 
   const nextVersion = increment(lastVersion, recommended.increment);
 
-  return [Object.assign({}, recommended, { pkg, lastVersion, nextVersion })];
+  return [
+    Object.assign({}, recommended, {
+      name,
+      path,
+      cwd,
+      pkg,
+      lastVersion,
+      nextVersion,
+    }),
+  ];
 }
 
 function arrayify(val) {

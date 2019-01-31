@@ -6,8 +6,8 @@
   "scripts": {
     "docs": "docks --outfile .verb.md && verb",
     "lint": "eslint '**/*.js' --cache --fix --quiet --format codeframe",
-    "test-only": "asia -r esm",
-    "test": "nyc asia",
+    "test-only": "node -r esm test/index.js",
+    "test": "nyc node test/index.js",
     "precommit": "yarn run lint && yarn run test-only",
     "commit": "yarn dry",
     "dry": "git add -A && git status --porcelain && gitcommit",
@@ -17,12 +17,12 @@
     "node": "^8.10.0 || >=10.13.0"
   },
   "dependencies": {
-    "@tunnckocore/package-json": "^1.0.3",
-    "esm": "^3.2.0",
-    "recommended-bump": "^1.3.2"
+    "@tunnckocore/package-json": "1.0.3",
+    "esm": "3.0.84",
+    "recommended-bump": "1.3.1"
   },
   "devDependencies": {
-    "asia": "^1.0.0-rc.25",
+    "asia": "^1.0.0-rc.31",
     "docks": "^0.6.1",
     "eslint": "^5.12.1",
     "eslint-config-tunnckocore": "^3.0.0",
