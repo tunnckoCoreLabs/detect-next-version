@@ -13,12 +13,15 @@
     "dry": "git add -A && git status --porcelain && gitcommit",
     "release": "standard-release"
   },
+  "resolutions": {
+    "esm": "^3.2.0"
+  },
   "engines": {
     "node": "^8.10.0 || >=10.13.0"
   },
   "dependencies": {
     "@tunnckocore/package-json": "1.0.3",
-    "esm": "3.0.84",
+    "esm": "^3.2.0",
     "recommended-bump": "1.3.1"
   },
   "devDependencies": {
