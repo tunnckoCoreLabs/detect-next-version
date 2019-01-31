@@ -54,7 +54,7 @@ import increment from './semver-inc';
  *   const commitOne = parse('fix: foo bar');
  *   const commitTwo = parse('feat: some feature subject');
  *
- *   // always and array, but we can destruct it here,
+ *   // always an array, but we can destruct it here,
  *   // because we know that it has only one item
  *   const [result] = await detector([commitOne, commitTwo], {
  *     name: '@my-org/my-awesomepkg'
