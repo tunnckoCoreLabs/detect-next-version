@@ -1,5 +1,5 @@
 import recommendedBump from 'recommended-bump';
-import packageJson from '@tunnckocore/package-json';
+import packageJson from 'package-json';
 import increment from './semver-inc';
 
 /**
@@ -90,7 +90,7 @@ export default async function detector(commits, options) {
   }
 
   if (opts.packages) {
-    const { endpoint, plugins, cwd } = opts;
+    const { plugins, cwd } = opts;
 
     /**
      * Inside commit
@@ -109,7 +109,7 @@ export default async function detector(commits, options) {
             const path = name.startsWith('@') ? name : `packages/${name}`;
             const [result] = await detector(commits, {
               name,
-              endpoint,
+              packageJson,
               plugins,
               cwd,
             });
@@ -151,7 +151,10 @@ export default async function detector(commits, options) {
   // a directory inside the root (cwd) of monorepo.
   const path = name.startsWith('@') ? name : `packages/${name}`;
 
-  const pkg = await packageJson(name, opts.endpoint);
+  const getPkg =
+    typeof opts.packageJson === 'function' ? opts.packageJson : packageJson;
+
+  const pkg = await getPkg(name, opts);
   const recommended = recommendedBump(cmts, opts.plugins);
   const lastVersion = pkg.version;
 

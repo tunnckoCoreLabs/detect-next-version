@@ -1,5 +1,6 @@
 import assert from 'assert';
 import test from 'asia';
+import packageJson from 'package-json';
 import detectNextVersion from '../src';
 import semverIncrement from '../src/semver-inc';
 
@@ -57,7 +58,7 @@ test('throw if no commit messages are given', async () => {
 test('do not give `result.nextVersion` when only "chore" commits', async () => {
   const result = await detectNextVersion(
     ['chore: foo bar baz', 'chore(ci): some build fix'],
-    { name: '@tunnckocore/qq5' },
+    { name: '@tunnckocore/qq5', packageJson },
   );
 
   assert.strictEqual(result.increment, false);
