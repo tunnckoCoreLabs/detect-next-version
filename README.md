@@ -1,4 +1,5 @@
 # detect-next-version [![npm version][npmv-img]][npmv-url] [![github release][ghrelease-img]][ghrelease-url] [![License][license-img]][license-url]
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FtunnckoCoreLabs%2Fdetect-next-version.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FtunnckoCoreLabs%2Fdetect-next-version?ref=badge_shield)
 
 > Calculates next version, based on given commit message and following Conventional Commits
 
@@ -296,3 +297,6 @@ Released under the [Apache-2.0 License][license-url].
 [parse-commit-message]: https://github.com/tunnckoCoreLabs/parse-commit-message
 [recommended-bump]: https://github.com/tunnckoCoreLabs/recommended-bump
 [semantic-release]: https://github.com/semantic-release/semantic-release
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FtunnckoCoreLabs%2Fdetect-next-version.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FtunnckoCoreLabs%2Fdetect-next-version?ref=badge_large)
