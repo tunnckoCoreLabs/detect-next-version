@@ -115,6 +115,11 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
+"@tunnckocore/p-all@*":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@tunnckocore/p-all/-/p-all-0.2.0.tgz#36c6def0f0e13141f44f6efd3eeebded4cda407b"
+  integrity sha512-6dJziz1RPe3302E4xfW8Cc5mXBO3Wn4f8mBVxYE/wWApANZ0VrqkDO08lKXaU1o+5jAgwu0NBYZCAs5SKoZ6Xg==
+
 acorn-jsx@^5.0.0:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-5.0.1.tgz#32a064fd925429216a09b141102bfdd185fae40e"
@@ -205,10 +210,19 @@ array-unique@^0.3.2:
   resolved "https://registry.yarnpkg.com/array-unique/-/array-unique-0.3.2.tgz#a894b75d4bc4f6cd679ef3244a9fd8f46ae2d428"
   integrity sha1-qJS3XUvE9s1nnvMkSp/Y9Gri1Cg=
 
-asia@^1.0.0-rc.31:
-  version "1.0.0-rc.31"
-  resolved "https://registry.yarnpkg.com/asia/-/asia-1.0.0-rc.31.tgz#41493a2b74b8dd75309b19c4857ea6637888178f"
-  integrity sha512-lcVPpuY9ucGuL/KXpgrD8i8CesQ6K37Xcv8tu9ecGbz9RKreGSWjopNY4U3J1z9sw12Wss+0AkQ771yYE6Hz3Q==
+asia-core@*:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/asia-core/-/asia-core-3.3.0.tgz#ed2679d171107b466868b5e7fd826ca04c6404f2"
+  integrity sha512-6KOqMI4b4/yQm3hYUVb34qs+gkf1QNYtdTozCkyQqEehKZ5NoqJoV6K7RPTec4F7hlY+gJVm5OyWcd4WTOzl0A==
+  dependencies:
+    "@tunnckocore/p-all" "*"
+
+asia@^3.0.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/asia/-/asia-3.3.0.tgz#e1f8ea44f341b8b6f233324b1250896b587fea4d"
+  integrity sha512-9f0Ggy0SlOdUeEmVyv0ASs01QML9x3mUrK9suBd41iJrsx2AXhhuMk8mY4u/KqvPBJ7ZQ5PH+L0SbaAmS5miAw==
+  dependencies:
+    asia-core "*"
 
 assign-symbols@^1.0.0:
   version "1.0.0"
